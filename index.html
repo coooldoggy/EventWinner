@@ -1,6 +1,51 @@
 <!DOCTYPE html>
 <html>
 
+<style>
+#title { 
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+#formtitle {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ margin-top: 50px;
+}
+
+#excelformContainer { 
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ margin-top: 10px;
+}
+
+#excelReadResult{
+    max-height: 150px;
+    overflow: scroll;
+    justify-content: center;
+    align-items: center;
+}
+
+#picktitle {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ margin-top: 50px;
+}
+
+#numformContainer { 
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ margin-top: 10px;
+}
+
+::-webkit-scrollbar { display: none; }
+</style>
+
 <head>
     <meta charset="UTF-8">
     <title>이벤트 당첨자 추첨기</title>
@@ -8,12 +53,37 @@
 </head>
 
 <body>
+    <div id="title">
+        <h1>🎉이벤트 당첨자 뽑기🎉</h1>
+    </div>
 
-    <!-- <form name="excelForm" method="POST" enctype="multipart/form-data"> -->
-    <input id="files" type="file" name="files[]">
-    <!-- <input type="submit"> -->
-    <!-- </form> -->
-    <script src="renderer.js"></script>
+    <div id="formtitle">
+        <h2>Step1. Excel File 선택하기👨🏻‍💻</h2>
+    </div>
+
+<div id="excelformContainer">
+    <form name="ipcForm" onSubmit="JavaScript:sendForm(event)">
+    <input id="files" type="file" name="xlsx">
+    <input type="submit">
+    </form>
+</div>
+
+<div id="excelReadResult">
+    <p id="response"></p>
+</div>
+
+<div id="picktitle">
+    <h2>Step2. 몇 명을 뽑겠습니까?</h2>
+</div>
+
+<div id="numformContainer">
+    <form name="numForm" onSubmit="JavaScript:sendNumber(event)">
+    <input id="number" type="number" name="number">
+    <input type="submit">
+    </form>
+</div>
+
+<script src='renderer.js'></script>
 </body>
 
 </html>

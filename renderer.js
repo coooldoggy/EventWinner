@@ -1,19 +1,18 @@
-const fileInput = document.getElementById('files');
+const ipcRenderer = require('electron').ipcRenderer;
+const responseParagraph = document.getElementById('response');
 
-const handelFileSelect = event => {
-    const files = event.target.files;
-    for (let file of files) {
-        if (!file.type.match('officedocument.*')) {
-            continue;
-        }
-
-        window.postMessage({
-            type: 'file-added',
-            data: file.path
-        }, '*');
-    }
+function sendForm(event) {
     event.preventDefault();
-    event.stopPropagation();
+    let files = document.getElementById("files").files[0].path; 
+    ipcRenderer.send('form-submission', files)
 }
 
-fileInput.addEventListener('change', handelFileSelect);
+ipcRenderer.on('form-received', function(event, args){
+    responseParagraph.innerHTML = JSON.stringify(args)
+});
+
+function sendNumber(evnet){
+    event.preventDefault();
+    let number = document.getElementById("number").value; 
+    ipcRenderer.send('number-submission', number)
+}
