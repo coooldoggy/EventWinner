@@ -5,6 +5,7 @@ const express = require('express')
 const expressapp = express();
 var resData = {};
 var excelList = [];
+var eventList = [];
 
 let mainWindow
 function createWindow() {
@@ -19,6 +20,10 @@ function createWindow() {
     mainWindow.loadFile('index.html')
     mainWindow.webContents.openDevTools()
 }
+
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+  }
 
 // app.whenReady().then(createWindow)
 
@@ -53,14 +58,24 @@ ipcMain.on('form-submission', function (event, files) {
         const sheetname = sheetnames[i];
         resData[sheetname] = xlsx.utils.sheet_to_json(workbook.Sheets[sheetname]);
     }
-    // excelList = Object.values(JSON.parse(JSON.stringify(resData)))
-    excelList = eval('('+JSON.stringify(resData)+')');
-    console.log(excelList);
+    excelList = Object.values(JSON.parse(JSON.stringify(resData)))
+    for (var j = 0; j < excelList.length; j++){
+        var counter = excelList[j];
+        for(var k =0; k< counter.length; k++){
+            var item = counter[k];
+            eventList.push(item);
+        }
+    }
+    console.log(eventList); 
     mainWindow.webContents.send('form-received', resData);
 });
 
 ipcMain.on('number-submission', function(event, number){
     console.log(number);
-    var rand = excelList[Math.floor(Math.random() * excelList.size)];
-    console.log(rand);
+    while(number--){
+       var rand = getRndInteger(0, eventList.length);
+       console.log(rand);
+       console.log(excelList[rand]);
+       mainWindow.webContents.send('winner-selected', excelList[rand]);
+    }
 });

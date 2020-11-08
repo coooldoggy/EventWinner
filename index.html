@@ -12,7 +12,7 @@
  display: flex;
  justify-content: center;
  align-items: center;
- margin-top: 50px;
+ margin-top: 20px;
 }
 
 #excelformContainer { 
@@ -37,6 +37,13 @@
 }
 
 #numformContainer { 
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ margin-top: 10px;
+}
+
+#winner {
  display: flex;
  justify-content: center;
  align-items: center;
@@ -81,6 +88,11 @@
     <input id="number" type="number" name="number">
     <input type="submit">
     </form>
+</div>
+
+<div id="winner">
+    <h2>당첨자는~💃🏻</h2>
+    <ul id="winnerList"></ul>
 </div>
 
 <script src='renderer.js'></script>
