@@ -1,5 +1,6 @@
 const ipcRenderer = require('electron').ipcRenderer;
 const responseParagraph = document.getElementById('response');
+const winnerList = document.getElementById('winnerList');
 
 function sendForm(event) {
     event.preventDefault();
@@ -16,3 +17,9 @@ function sendNumber(evnet){
     let number = document.getElementById("number").value; 
     ipcRenderer.send('number-submission', number)
 }
+
+ipcRenderer.on('winner-selected', function(event, args){
+    var li = document.createElement('li');
+    li.appendChild(document.createTextNode(JSON.stringify(args)));
+    winnerList.appendChild(li);
+});
