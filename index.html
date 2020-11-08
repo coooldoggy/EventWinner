@@ -2,55 +2,68 @@
 <html>
 
 <style>
-#title { 
- display: flex;
- justify-content: center;
- align-items: center;
-}
+    #title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-#formtitle {
- display: flex;
- justify-content: center;
- align-items: center;
- margin-top: 20px;
-}
+    #formtitle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
 
-#excelformContainer { 
- display: flex;
- justify-content: center;
- align-items: center;
- margin-top: 10px;
-}
+    #excelformContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+    }
 
-#excelReadResult{
-    max-height: 150px;
-    overflow: scroll;
-    justify-content: center;
-    align-items: center;
-}
+    #excelReadResult {
+        max-height: 150px;
+        overflow: scroll;
+        justify-content: center;
+        align-items: center;
+    }
 
-#picktitle {
- display: flex;
- justify-content: center;
- align-items: center;
- margin-top: 50px;
-}
+    #picktitle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+    }
 
-#numformContainer { 
- display: flex;
- justify-content: center;
- align-items: center;
- margin-top: 10px;
-}
+    #numformContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+    }
 
-#winner {
- display: flex;
- justify-content: center;
- align-items: center;
- margin-top: 10px;
-}
+    #winner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+    }
 
-::-webkit-scrollbar { display: none; }
+    #winnerlistContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 5px;
+    }
+
+    #winnerList {
+        align-items: center;
+    }
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
 </style>
 
 <head>
@@ -68,34 +81,36 @@
         <h2>Step1. Excel File 선택하기👨🏻‍💻</h2>
     </div>
 
-<div id="excelformContainer">
-    <form name="ipcForm" onSubmit="JavaScript:sendForm(event)">
-    <input id="files" type="file" name="xlsx">
-    <input type="submit">
-    </form>
-</div>
+    <div id="excelformContainer">
+        <form name="ipcForm" onSubmit="JavaScript:sendForm(event)">
+            <input id="files" type="file" name="xlsx">
+            <input type="submit">
+        </form>
+    </div>
 
-<div id="excelReadResult">
-    <p id="response"></p>
-</div>
+    <div id="excelReadResult">
+        <p id="response"></p>
+    </div>
 
-<div id="picktitle">
-    <h2>Step2. 몇 명을 뽑겠습니까?</h2>
-</div>
+    <div id="picktitle">
+        <h2>Step2. 몇 명을 뽑겠습니까?</h2>
+    </div>
 
-<div id="numformContainer">
-    <form name="numForm" onSubmit="JavaScript:sendNumber(event)">
-    <input id="number" type="number" name="number">
-    <input type="submit">
-    </form>
-</div>
+    <div id="numformContainer">
+        <form name="numForm" onSubmit="JavaScript:sendNumber(event)">
+            <input id="number" type="number" name="number">
+            <input type="submit">
+        </form>
+    </div>
 
-<div id="winner">
-    <h2>당첨자는~💃🏻</h2>
-    <ul id="winnerList"></ul>
-</div>
+    <div id="winner">
+        <h2>당첨자는~💃🏻</h2>
+    </div>
+    <div id="winnerlistContainer">
+        <ul id="winnerList"></ul>
+    </div>
 
-<script src='renderer.js'></script>
+    <script src='renderer.js'></script>
 </body>
 
 </html>

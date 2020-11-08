@@ -11,7 +11,7 @@ let mainWindow
 function createWindow() {
     mainWindow = new BrowserWindow({
         width: 800,
-        height: 600,
+        height: 700,
         webPreferences: {
             nodeIntegration: true
         }
@@ -22,10 +22,8 @@ function createWindow() {
 }
 
 function getRndInteger(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
-  }
-
-// app.whenReady().then(createWindow)
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
@@ -59,23 +57,23 @@ ipcMain.on('form-submission', function (event, files) {
         resData[sheetname] = xlsx.utils.sheet_to_json(workbook.Sheets[sheetname]);
     }
     excelList = Object.values(JSON.parse(JSON.stringify(resData)))
-    for (var j = 0; j < excelList.length; j++){
+    for (var j = 0; j < excelList.length; j++) {
         var counter = excelList[j];
-        for(var k =0; k< counter.length; k++){
+        for (var k = 0; k < counter.length; k++) {
             var item = counter[k];
             eventList.push(item);
         }
     }
-    console.log(eventList); 
+    console.log(eventList[45]);
     mainWindow.webContents.send('form-received', resData);
 });
 
-ipcMain.on('number-submission', function(event, number){
+ipcMain.on('number-submission', function (event, number) {
     console.log(number);
-    while(number--){
-       var rand = getRndInteger(0, eventList.length);
-       console.log(rand);
-       console.log(excelList[rand]);
-       mainWindow.webContents.send('winner-selected', excelList[rand]);
+    while (number--) {
+        var rand = getRndInteger(0, eventList.length);
+        console.log(rand);
+        console.log(eventList[rand]);
+        mainWindow.webContents.send('winner-selected', eventList[rand]);
     }
 });
