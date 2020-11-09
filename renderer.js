@@ -12,7 +12,7 @@ ipcRenderer.on('form-received', function (event, args) {
     responseParagraph.innerHTML = JSON.stringify(args)
 });
 
-function sendNumber(evnet) {
+function sendNumber(event) {
     event.preventDefault();
     let number = document.getElementById("number").value;
     ipcRenderer.send('number-submission', number)

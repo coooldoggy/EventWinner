@@ -64,7 +64,6 @@ ipcMain.on('form-submission', function (event, files) {
             eventList.push(item);
         }
     }
-    console.log(eventList[45]);
     mainWindow.webContents.send('form-received', resData);
 });
 
@@ -73,8 +72,6 @@ ipcMain.on('number-submission', function (event, number) {
     mainWindow.webContents.send('clear-list', number);
     while (number--) {
         var rand = getRndInteger(0, eventList.length);
-        console.log(rand);
-        console.log(eventList[rand]);
         mainWindow.webContents.send('winner-selected', eventList[rand]);
     }
 });
