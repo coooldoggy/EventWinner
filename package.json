@@ -1,20 +1,99 @@
 {
   "name": "eventwinner",
   "version": "1.0.0",
-  "description": "",
+  "description": "Pick random price winner from Microsoft Office Excel file",
   "main": "index.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-packager . ElectronPJ",
+    "build:osx": "electron-builder --mac",
+    "build:linux": "npm run build:linux32 && npm run build:linux64",
+    "build:linux32": "electron-builder --linux --ia32",
+    "build:linux64": "electron-builder --linux --x64",
+    "build:win": "npm run build:win32 && npm run build:win64",
+    "build:win32": "electron-builder --win --ia32",
+    "build:win64": "electron-builder --win --x64",
+    "build": "electron-builder -mwl"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coooldoggy/EventWinner.git"
+  },
+  "keywords": [
+    "excel",
+    "event",
+    "winner",
+    "random picker",
+    "elctron",
+    "read excel"
+  ],
+  "author": {
+    "name": "Yulim Lee",
+    "email": "coooldoggy@gmail.com",
+    "url": "https://coooldoggy.github.io"
+  },
+  "license": "MIT",
   "devDependencies": {
-    "electron": "^10.1.5"
+    "asar": "^3.0.3",
+    "electron": "^10.1.5",
+    "electron-builder": "^22.9.1",
+    "electron-packager": "^15.1.0"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "xlsx": "^0.16.8"
+  },
+  "build": {
+    "productName": "EventWinner",
+    "appId": "com.coooldoggy.eventwinner",
+    "asar": true,
+    "protocols": {
+      "name": "EventWinner",
+      "schemes": [
+        "EventWinner"
+      ]
+    },
+    "mac": {
+      "target": [
+        "default"
+      ],
+      "icon": "./electron-root/favicon.ico"
+    },
+    "dmg": {
+      "title": "EventWinner",
+      "icon": "./electron-root/favicon.ico"
+    },
+    "win": {
+      "target": [
+        "zip",
+        "nsis"
+      ],
+      "icon": "./electron-root/favicon.ico"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm",
+        "zip",
+        "tar.gz"
+      ],
+      "icon": "./electron-root/favicon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": false,
+      "installerLanguages": [
+        "en_US",
+        "ko_KR"
+      ],
+      "language": "1042"
+    },
+    "directories": {
+      "buildResources": "resources/installer/",
+      "output": "build/",
+      "app": "."
+    }
   }
 }

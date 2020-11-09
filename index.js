@@ -18,7 +18,7 @@ function createWindow() {
     })
 
     mainWindow.loadFile('index.html')
-    mainWindow.webContents.openDevTools()
+    // mainWindow.webContents.openDevTools()
 }
 
 function getRndInteger(min, max) {
@@ -70,6 +70,7 @@ ipcMain.on('form-submission', function (event, files) {
 
 ipcMain.on('number-submission', function (event, number) {
     console.log(number);
+    mainWindow.webContents.send('clear-list', number);
     while (number--) {
         var rand = getRndInteger(0, eventList.length);
         console.log(rand);
