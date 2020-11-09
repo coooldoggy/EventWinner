@@ -8,3 +8,20 @@ $ cd EventWinner
 $ npm install
 $ npm start
 ```
+
+## 배포하기 
+
+### 모든 platform
+```
+npm run build
+```
+
+### Window
+```
+npm run build:win
+```
+
+### Mac OS
+```
+npm run build:osx
+```
