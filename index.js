@@ -74,4 +74,5 @@ ipcMain.on('number-submission', function (event, number) {
         var rand = getRndInteger(0, eventList.length);
         mainWindow.webContents.send('winner-selected', eventList[rand]);
     }
+    mainWindow.webContents.send('create-downloadbtn', "");
 });
