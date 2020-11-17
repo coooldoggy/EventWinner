@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron')
 const bodyParser = require('body-parser')
 const xlsx = require('xlsx')
 const express = require('express')
+const date = require('moment')
 const expressapp = express();
 var resData = {};
 var excelList = [];
@@ -23,6 +24,14 @@ function createWindow() {
 
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function createExcelfile(winnerList) {
+    const book = xlsx.utils.book_new();
+    const list = xlsx.utils.json_to_sheet(winnerList);
+    xlsx.utils.book_append_sheet(book, list, "당첨자");
+    xlsx.writeFile(book, "당첨자" + date().format("MM-DD-YYYY") + ".xlsx");
+    // mainWindow.webContents.send('create-downloadbtn', "");
 }
 
 app.on('window-all-closed', () => {
@@ -70,9 +79,11 @@ ipcMain.on('form-submission', function (event, files) {
 ipcMain.on('number-submission', function (event, number) {
     console.log(number);
     mainWindow.webContents.send('clear-list', number);
+    var winnerList = [];
     while (number--) {
         var rand = getRndInteger(0, eventList.length);
-        mainWindow.webContents.send('winner-selected', eventList[rand]);
+        winnerList.push(eventList[rand]);
     }
-    mainWindow.webContents.send('create-downloadbtn', "");
+    mainWindow.webContents.send('winner-selected', winnerList);
+    createExcelfile(winnerList);
 });
